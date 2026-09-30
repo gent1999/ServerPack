@@ -6,7 +6,6 @@ import {
   create,
   update,
   remove,
-  patchStatus,
   listPublished,
   getPublishedBySlug,
 } from '../controllers/articleController.js';
@@ -19,7 +18,6 @@ adminArticleRoutes.get('/:id', getAdminOne);
 adminArticleRoutes.post('/', create);
 adminArticleRoutes.put('/:id', update);
 adminArticleRoutes.delete('/:id', remove);
-adminArticleRoutes.patch('/:id/status', patchStatus);
 
 export const publicArticleRoutes = Router();
 

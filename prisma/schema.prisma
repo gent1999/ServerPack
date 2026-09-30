@@ -9,11 +9,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum ArticleStatus {
-  DRAFT
-  PUBLISHED
-}
-
 model Admin {
   id           Int      @id @default(autoincrement())
   email        String   @unique
@@ -25,16 +20,15 @@ model Admin {
 }
 
 model Article {
-  id          Int           @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
-  slug        String        @unique
-  excerpt     String?
-  content     String        @db.Text
-  status      ArticleStatus @default(DRAFT)
-  authorName  String        @default("Wolfpack.fm")
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  publishedAt DateTime?
+  slug        String   @unique
+  tag         String   @default("General")
+  content     String   @db.Text
+  authorName  String   @default("Wolfpack.fm")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime @default(now())
 
   @@map("articles")
 }

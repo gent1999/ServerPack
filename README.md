@@ -45,19 +45,21 @@ The seed script (`npm run seed`) is idempotent: re-running it updates the existi
 
 ### Admin articles (protected, `Authorization: Bearer <token>`)
 
-- `GET /api/admin/articles` — all articles (draft + published), newest first.
+There is no draft state — an article is live the moment it's created.
+
+- `GET /api/admin/articles` — all articles, newest first.
 - `GET /api/admin/articles/:id`
-- `POST /api/admin/articles` — `{ title, excerpt?, content, authorName?, status? }`. Slug is auto-generated from the title and de-duplicated (`-2`, `-3`, ...).
+- `POST /api/admin/articles` — `{ title, tag, content, authorName? }`. Slug is auto-generated from the title and de-duplicated (`-2`, `-3`, ...). `publishedAt` defaults to the creation time.
 - `PUT /api/admin/articles/:id`
 - `DELETE /api/admin/articles/:id`
-- `PATCH /api/admin/articles/:id/status` — `{ status: "DRAFT" | "PUBLISHED" }`. Sets `publishedAt` the first time an article is published; does not clear it when reverted to draft.
 
 ### Public articles (no auth)
 
-- `GET /api/articles` — published articles only, newest published first.
-- `GET /api/articles/:slug` — 404 for missing or draft articles.
+- `GET /api/articles` — all articles, newest published first.
+- `GET /api/articles/:slug` — 404 if the slug doesn't exist.
 
 ## Notes on decisions
 
 - Slugs are generated once at creation and are **not** regenerated on edit, so published URLs stay stable even if the title changes later.
 - `bcryptjs` (pure JS) is used instead of native `bcrypt` to avoid native build-toolchain requirements — same hashing algorithm, same security properties.
+- `content` is stored as raw Markdown text; there is no rendering step yet since there's no public article detail page to render it on.
