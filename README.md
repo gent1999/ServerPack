@@ -49,7 +49,7 @@ There is no draft state — an article is live the moment it's created.
 
 - `GET /api/admin/articles` — all articles, newest first.
 - `GET /api/admin/articles/:id`
-- `POST /api/admin/articles` — `{ title, tag, content, authorName?, spotifyUrl?, soundcloudUrl?, youtubeUrl? }`. Slug is auto-generated from the title and de-duplicated (`-2`, `-3`, ...). `publishedAt` defaults to the creation time.
+- `POST /api/admin/articles` — `{ title, tag, content, authorName?, imageUrl?, spotifyUrl?, soundcloudUrl?, youtubeUrl? }`. Slug is auto-generated from the title and de-duplicated (`-2`, `-3`, ...). `publishedAt` defaults to the creation time. `imageUrl` is a plain URL for now (no upload/storage pipeline yet).
 - `PUT /api/admin/articles/:id`
 - `DELETE /api/admin/articles/:id`
 

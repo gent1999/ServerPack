@@ -42,7 +42,7 @@ function validateArticleBody(body, { partial = false } = {}) {
     }
   }
 
-  for (const field of ['spotifyUrl', 'soundcloudUrl', 'youtubeUrl']) {
+  for (const field of ['imageUrl', 'spotifyUrl', 'soundcloudUrl', 'youtubeUrl']) {
     if (body[field] === undefined) continue;
 
     if (body[field] === null || body[field] === '') {
@@ -89,6 +89,7 @@ export async function create(req, res) {
       tag: data.tag,
       content: data.content,
       authorName: data.authorName || 'Wolfpack.fm',
+      imageUrl: data.imageUrl ?? null,
       spotifyUrl: data.spotifyUrl ?? null,
       soundcloudUrl: data.soundcloudUrl ?? null,
       youtubeUrl: data.youtubeUrl ?? null,

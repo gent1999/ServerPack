@@ -26,6 +26,7 @@ model Article {
   tag           String   @default("General")
   content       String   @db.Text
   authorName    String   @default("Wolfpack.fm")
+  imageUrl      String?
   spotifyUrl    String?
   soundcloudUrl String?
   youtubeUrl    String?
