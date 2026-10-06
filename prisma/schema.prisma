@@ -23,6 +23,7 @@ model Artist {
   id            Int      @id @default(autoincrement())
   name          String
   slug          String   @unique
+  featured      Boolean  @default(false)
   bio           String?  @db.Text
   imageUrl      String?
   spotifyUrl    String?

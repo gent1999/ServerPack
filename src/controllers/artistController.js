@@ -28,6 +28,14 @@ function validateArtistBody(body, { partial = false } = {}) {
     }
   }
 
+  if (body.featured !== undefined) {
+    if (typeof body.featured !== 'boolean') {
+      errors.push('featured must be a boolean');
+    } else {
+      data.featured = body.featured;
+    }
+  }
+
   for (const field of URL_FIELDS) {
     if (body[field] === undefined) continue;
 
@@ -46,7 +54,7 @@ function validateArtistBody(body, { partial = false } = {}) {
 // ---------- Admin ----------
 
 export async function listAdmin(req, res) {
-  const artists = await prisma.artist.findMany({ orderBy: { name: 'asc' } });
+  const artists = await prisma.artist.findMany({ orderBy: [{ featured: 'desc' }, { name: 'asc' }] });
   res.json({ artists });
 }
 
@@ -70,6 +78,7 @@ export async function create(req, res) {
     data: {
       name: data.name,
       slug,
+      featured: data.featured ?? false,
       bio: data.bio ?? null,
       imageUrl: data.imageUrl ?? null,
       spotifyUrl: data.spotifyUrl ?? null,
@@ -111,7 +120,7 @@ export async function remove(req, res) {
 // ---------- Public ----------
 
 export async function listPublic(req, res) {
-  const artists = await prisma.artist.findMany({ orderBy: { name: 'asc' } });
+  const artists = await prisma.artist.findMany({ orderBy: [{ featured: 'desc' }, { name: 'asc' }] });
   res.json({ artists });
 }
 

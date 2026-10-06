@@ -60,15 +60,17 @@ There is no draft state — an article is live the moment it's created.
 
 ### Admin artists (protected, `Authorization: Bearer <token>`)
 
-- `GET /api/admin/artists` — all artists, alphabetical.
+Featured artists sort first (then alphabetical) in both the admin and public lists.
+
+- `GET /api/admin/artists` — all artists, featured first.
 - `GET /api/admin/artists/:id`
-- `POST /api/admin/artists` — `{ name, bio?, imageUrl?, spotifyUrl?, soundcloudUrl?, youtubeUrl?, geniusUrl?, appleMusicUrl? }`. Slug is auto-generated from the name and de-duplicated. `imageUrl` is a plain URL, same as articles.
+- `POST /api/admin/artists` — `{ name, featured?, bio?, imageUrl?, spotifyUrl?, soundcloudUrl?, youtubeUrl?, geniusUrl?, appleMusicUrl? }`. Slug is auto-generated from the name and de-duplicated. `imageUrl` is a plain URL, same as articles. `featured` defaults to `false`.
 - `PUT /api/admin/artists/:id`
 - `DELETE /api/admin/artists/:id`
 
 ### Public artists (no auth)
 
-- `GET /api/artists` — all artists, alphabetical.
+- `GET /api/artists` — all artists, featured first.
 - `GET /api/artists/:slug` — 404 if the slug doesn't exist.
 
 ## Notes on decisions
