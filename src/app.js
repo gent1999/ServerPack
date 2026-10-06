@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import authRoutes from './routes/authRoutes.js';
 import { adminArticleRoutes, publicArticleRoutes } from './routes/articleRoutes.js';
 import { adminArtistRoutes, publicArtistRoutes } from './routes/artistRoutes.js';
+import { adminRadioTrackRoutes, publicRadioTrackRoutes } from './routes/radioTrackRoutes.js';
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.use('/api/admin/articles', adminArticleRoutes);
 app.use('/api/articles', publicArticleRoutes);
 app.use('/api/admin/artists', adminArtistRoutes);
 app.use('/api/artists', publicArtistRoutes);
+app.use('/api/admin/radio-tracks', adminRadioTrackRoutes);
+app.use('/api/radio-tracks', publicRadioTrackRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });

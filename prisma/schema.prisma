@@ -37,6 +37,20 @@ model Artist {
   @@map("artists")
 }
 
+model RadioTrack {
+  id             Int      @id @default(autoincrement())
+  title          String
+  artist         String
+  spotifyTrackId String?
+  featured       Boolean  @default(false)
+  blurb          String?  @db.Text
+  position       Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("radio_tracks")
+}
+
 model Article {
   id            Int      @id @default(autoincrement())
   title         String
