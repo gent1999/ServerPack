@@ -2,7 +2,7 @@
 
 Backend for Wolfpack.fm: admin authentication + a text-article API. PERN stack (PostgreSQL + Express + React frontend + Node) with Prisma as the ORM.
 
-This first pass covers **admin authentication** and **text-only articles** only. No images, artists, playlists, submissions, or additional roles yet.
+This covers **admin authentication**, **articles**, and **artist profiles**. No playlists, submissions, or additional admin roles yet.
 
 ## Stack
 
@@ -57,6 +57,19 @@ There is no draft state — an article is live the moment it's created.
 
 - `GET /api/articles` — all articles, newest published first.
 - `GET /api/articles/:slug` — 404 if the slug doesn't exist.
+
+### Admin artists (protected, `Authorization: Bearer <token>`)
+
+- `GET /api/admin/artists` — all artists, alphabetical.
+- `GET /api/admin/artists/:id`
+- `POST /api/admin/artists` — `{ name, bio?, imageUrl?, spotifyUrl?, soundcloudUrl?, youtubeUrl?, geniusUrl?, appleMusicUrl? }`. Slug is auto-generated from the name and de-duplicated. `imageUrl` is a plain URL, same as articles.
+- `PUT /api/admin/artists/:id`
+- `DELETE /api/admin/artists/:id`
+
+### Public artists (no auth)
+
+- `GET /api/artists` — all artists, alphabetical.
+- `GET /api/artists/:slug` — 404 if the slug doesn't exist.
 
 ## Notes on decisions
 

@@ -7,13 +7,13 @@ export function slugify(title) {
     .replace(/^-+|-+$/g, '');
 }
 
-export async function generateUniqueSlug(prisma, title, excludeId = null) {
-  const base = slugify(title) || 'article';
+export async function generateUniqueSlug(model, title, excludeId = null) {
+  const base = slugify(title) || 'item';
   let slug = base;
   let suffix = 2;
 
   while (true) {
-    const existing = await prisma.article.findUnique({ where: { slug } });
+    const existing = await model.findUnique({ where: { slug } });
     if (!existing || existing.id === excludeId) {
       return slug;
     }

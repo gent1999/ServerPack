@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import authRoutes from './routes/authRoutes.js';
 import { adminArticleRoutes, publicArticleRoutes } from './routes/articleRoutes.js';
+import { adminArtistRoutes, publicArtistRoutes } from './routes/artistRoutes.js';
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/admin/articles', adminArticleRoutes);
 app.use('/api/articles', publicArticleRoutes);
+app.use('/api/admin/artists', adminArtistRoutes);
+app.use('/api/artists', publicArtistRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });

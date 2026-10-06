@@ -19,6 +19,23 @@ model Admin {
   @@map("admins")
 }
 
+model Artist {
+  id            Int      @id @default(autoincrement())
+  name          String
+  slug          String   @unique
+  bio           String?  @db.Text
+  imageUrl      String?
+  spotifyUrl    String?
+  soundcloudUrl String?
+  youtubeUrl    String?
+  geniusUrl     String?
+  appleMusicUrl String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("artists")
+}
+
 model Article {
   id            Int      @id @default(autoincrement())
   title         String

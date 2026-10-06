@@ -80,7 +80,7 @@ export async function create(req, res) {
   const { errors, data } = validateArticleBody(req.body || {});
   if (errors.length) return res.status(400).json({ error: errors.join(', ') });
 
-  const slug = await generateUniqueSlug(prisma, data.title);
+  const slug = await generateUniqueSlug(prisma.article, data.title);
 
   const article = await prisma.article.create({
     data: {
